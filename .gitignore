@@ -1,1 +1,4 @@
-*.txt
+Additional_Data/
+*/*env/
+*.log
+*/*.log
