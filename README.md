@@ -17,29 +17,29 @@ The only prerequisite is `Python3`
 
 1. Clone this repository:
 
-`git clone git@github.com:zwoefler/UsefulPythonScripts.git`
+```git clone git@github.com:zwoefler/UsefulPythonScripts.git```
 
 2. Change to the directory with your desired script, e.g. `GitHub-Scripts`:
 
-`cd UsefulPythonScripts/GitHub-Scripts/`
+```cd UsefulPythonScripts/GitHub-Scripts/```
 
 3. Create a **Virtual Environment** in the folder.
 Choose a name for oyur environment and end it with `env` to keep the project naming conventions.:
 
-`python3 -m venv GHenv`
+```python3 -m venv GHenv```
 
 4. Activate your **Virtual Environment**:
 
-`source GHVenv/bin/activate`
+```source GHVenv/bin/activate```
 Can be deavtivated: `deactivate`
 
 5. Install the requirements in the `requirements.txt`:
 
-`pip install -r requirements.txt`
+```pip install -r requirements.txt```
 
 6. Execute the Python Script of your desire:
 
-`python3 create_new_git_repo.py MyNewRepo Username Password`
+```python3 create_new_git_repo.py MyNewRepo Username Password```
 
 
 
