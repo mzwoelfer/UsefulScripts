@@ -9,21 +9,12 @@ from selenium import webdriver
 PARSER = argparse.ArgumentParser(
     description='Gets the name of the repository that you want to create')
 PARSER.add_argument('repository_name', type=str, help='The name of the repository')
+PARSER.add_argument('git_username', type=str, help='Your GitHub Username to login')
+PARSER.add_argument('git_password', type=str, help='Your GitHub Password to login')
 ARGS = PARSER.parse_args()
 LOGIN_CREDENTIALS_FILE = '../Additional_Data/credentials.txt'
 BROWSER = webdriver.Firefox()
 BROWSER.get('http://github.com/login')
-
-
-def get_login_credentials(credentials_file):
-    """Reads in the login credentials"""
-    with open(credentials_file, 'r') as file:
-        return file.readlines()
-
-
-def trim_credentials(creds):
-    """Trims all whitespaces from the credentials and returns the username and password"""
-    return [cred.strip() for cred in creds]
 
 
 def remove_repo_from_github(reponame, git_username, git_password):
@@ -51,9 +42,7 @@ def remove_repo_from_github(reponame, git_username, git_password):
 
 def main():
     """The main function of delete_git_repo.py"""
-    credentials = get_login_credentials(LOGIN_CREDENTIALS_FILE)
-    trimmed_credentials = trim_credentials(credentials)
-    remove_repo_from_github(ARGS.repository_name, trimmed_credentials[0], trimmed_credentials[1])
+    remove_repo_from_github(ARGS.repository_name, ARGS.git_username, ARGS.git_password)
 
 
 if __name__ == "__main__":
