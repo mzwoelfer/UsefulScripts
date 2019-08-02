@@ -1,10 +1,11 @@
-import sys
-import os
-from selenium import webdriver
+"""This module creates a new GitHub Repository with your credentials. They are getting
+pulled from the '../Additional_Data/Credentials.txt' file"""
 import argparse
+from selenium import webdriver
 
 
-PARSER = argparse.ArgumentParser(description='Gets the name of the repository that you want to create')
+PARSER = argparse.ArgumentParser(
+        description='Gets the name of the repository that you want to create')
 PARSER.add_argument('repository_name', type=str, help='The name of the repository')
 ARGS = PARSER.parse_args()
 LOGIN_CREDENTIALS_FILE = '../Additional_Data/credentials.txt'
@@ -22,7 +23,8 @@ def trim_credentials(creds):
     """Trims all whitespaces from the credentials and returns the username and password"""
     return [cred.strip() for cred in creds]
 
-def create_Repo(repo_name, git_username, git_password):
+
+def create_repo(repo_name, git_username, git_password):
     """Automatically creates a new github repo"""
     login_input = BROWSER.find_elements_by_xpath("//input[@name='login']")[0]
     login_input.send_keys(git_username)
@@ -33,11 +35,17 @@ def create_Repo(repo_name, git_username, git_password):
     BROWSER.get('https://github.com/new')
     repository_name_input = BROWSER.find_elements_by_xpath("//input[@name='repository[name]']")[0]
     repository_name_input.send_keys(repo_name)
-    create_repo = BROWSER.find_element_by_css_selector('button.first-in-line')
-    create_repo.submit()
+    create_button = BROWSER.find_element_by_css_selector('button.first-in-line')
+    create_button.submit()
     BROWSER.quit()
 
-if __name__ == "__main__":
+
+def main():
+    """The Main function of the create_new_git_repo.py"""
     credentials = get_login_credentials(LOGIN_CREDENTIALS_FILE)
     trimmed_credentials = trim_credentials(credentials)
-    create_Repo(ARGS.repository_name, trimmed_credentials[0], trimmed_credentials[1])
+    create_repo(ARGS.repository_name, trimmed_credentials[0], trimmed_credentials[1])
+
+
+if __name__ == "__main__":
+    main()
