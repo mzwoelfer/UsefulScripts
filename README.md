@@ -8,12 +8,12 @@ Each folder groups useful python scripts and is self-contained. To make it very 
 there is a `requirements.txt` file in each folder. So to run the scripts follow the steps
 in the [Installation](#installation) section.
 
-### Prerequisites
+## Prerequisites
 
 The only prerequisite is `Python3`
 
 
-### Installing
+## Installing
 
 Clone this repository:
 
