@@ -1,5 +1,5 @@
 # Usage
-# python3 docx_to_pdf YOUR_DOCUMENT.docx YOUR_EXPORT_PDF.pdf
+# python3 docx_to_pdf.pdf path_to_folder_with_word_doc
 import sys
 import os
 import comtypes.client
@@ -14,5 +14,7 @@ def word_to_pdf(_in, _out):
     doc.Close()
     worddoc.Quit()
 
-word_to_pdf(sys.argv[1], sys.argv[2])
+destination = sys.argv[1]
+for file in os.listdir(destination):
+    word_to_pdf(destination + "\\" + file, destination + "\\" + file + ".pdf")
 
