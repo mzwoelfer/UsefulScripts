@@ -1,3 +1,8 @@
+"""
+Excpects a full path to the folder where the mp4 are located.
+If no output path is given, it will push the gifs to the folder given
+"""
+
 import ffmpy
 import sys
 import os
@@ -15,7 +20,7 @@ def convert_mp4_to_gif(input_file, folder, output_folder):
     print("converting to ", video_file, "to", gif_file)
     ff = ffmpy.FFmpeg(
         inputs = {video_file : None},
-        outputs = {gif_file : None})
+        outputs = {gif_file : ["-vf", "fps=10,scale=320:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse"]})
     ff.run()
     return
 
