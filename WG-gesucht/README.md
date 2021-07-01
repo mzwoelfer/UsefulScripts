@@ -2,9 +2,9 @@
 
 # Prerequisites
 ### Python3
-Create a python3 virtual env: `python3 -m venv Env`
-Activate virtual env: `source Env/bin/activate`
-Install requirements: `pip install -r reuqirements`
+- Create a python3 virtual env: `python3 -m venv Env`
+- Activate virtual env: `source Env/bin/activate`
+- Install requirements: `pip install -r reuqirements`
 
 ### Selenium / Webcontent
 We are using Google Chrome. So Chrome needs to be installed on your machine.
