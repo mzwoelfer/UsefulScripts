@@ -8,6 +8,8 @@ services:
         external_url 'http://localhost:8888'
         nginx['listen_port'] = 8888
         gitlab_rails['initial_root_password'] = 'some_initial_password'
+        gitlab_rails['gitlab_ssh_host'] = "localhost"
+        gitlab_rails['gitlab_shell_ssh_port'] = 2222
         puma['worker_process'] = 0
       GITLAB_SHARED_RUNNERS_REGISTRATION_TOKEN: some_registration_token
     volumes:
@@ -16,6 +18,7 @@ services:
       - ./gitlab/data:/var/opt/gitlab
     ports:
       - '8888:8888'
+      - '2222:22'
     healthcheck:
       test: curl --fail http://localhost:8888/users/sign_in || exit 1
       interval: 60s
@@ -28,7 +31,7 @@ services:
     command: ["/bin/sh", "-c", "gitlab-runner register \
                                 --non-interactive \
                                 --url 'hptt://localhost:8888' \
-                                --registration-token 'some_registration_token' \
+                                --token 'some_registration_token' \
                                 --executor 'docker' \
                                 --docker-network-mode 'host' \
                                 --docker-image 'python:alpine' \
