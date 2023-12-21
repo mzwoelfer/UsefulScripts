@@ -24,6 +24,39 @@ some_initial_password
 
 
 #  Problems
+### Registering Runner
+1. Go to Admin page: Admin user `root` + `initial_root_password`
+2. Search > GoTo > "Admin Area / Dashboard"
+3. CI/CD > Runners
+4. New Instance runner
+5. Click run untagged runners
+6. On your local machine run:
+```bash
+# RUn shell in runner container
+docker exec -it gitlab-runner /bin/bash
+
+# FOllow instructions from GitLab
+# register runner and set docker network mode to host:
+gitlab-runner register
+  --url http://localhost:8888
+  --token <YOUR_TOKEN>
+  --docker-network-mode host
+
+# Hit Enter
+# Enter the GitLab instance URL (for example, https://gitlab.com/):
+
+# GIve your runner a name
+# Enter a name for the runner. This is stored only in the local config.toml file:
+
+# Enter an executor:
+docker
+
+# Enter the default Docker image (for example, ruby:2.7):
+python:3.9-alpine
+
+
+```
+
 ### Pushing to locahost via SSH
 Set gitlab_rails `gitlab_ssh_host` and `gitlab_shell_ssh_port` and add portforwarding:
 ```
