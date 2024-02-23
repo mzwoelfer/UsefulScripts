@@ -6,7 +6,7 @@ See [Dependencies](#dependencies)
 
 Start gitlab via and wait:
 ```bash
-docker-compose up
+docker compose up
 ```
 
 - Visit `localhost:8888`
