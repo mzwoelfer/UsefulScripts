@@ -24,6 +24,15 @@ some_initial_password
 
 
 #  Problems
+### Resetting root Password
+
+- Exec into the container: `docker exec -it gitlab /bin/bash`
+- `gitlab-rake "gitlab:password:reset"`
+- Wait for the prompt "Enter username:"
+- Type in `root`
+- Wait for prompt "Enter password:", and confirm it
+- See this success message `Password successfully updated for user with username root.`
+
 ### Registering Runner
 1. Go to Admin page: Admin user `root` + `initial_root_password`
 2. Search > GoTo > "Admin Area / Dashboard"
