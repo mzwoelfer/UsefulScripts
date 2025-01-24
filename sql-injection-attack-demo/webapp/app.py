@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
 import psycopg
 import os
 
@@ -23,15 +23,28 @@ def query_db(query):
     except Exception as e:
         return [str(e)]
 
-@app.route("/search", methods=["GET"])
-def search():
-    results = None
-    user_id = request.args.get("id", "")  
+@app.route("/", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        name = request.form.get("name")
+        query = f"SELECT id FROM bookings WHERE name = '{name}';"
+        results = query_db(query)
+        if results:
+            user_id = results[0][0]  
+            return redirect(url_for("profile", id=user_id))
+        else:
+            return "User not found", 404
+    return render_template("login.html")
+
+@app.route("/profile", methods=["GET"])
+def profile():
+    user_id = request.args.get("id", "")
     if user_id:
+        # Vulnerable query to fetch user data
         query = f"SELECT * FROM bookings WHERE id = {user_id};"
         results = query_db(query)
-    return render_template("search.html", results=results)
-
+        return render_template("profile.html", results=results)
+    return "No user ID provided", 400
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
