@@ -23,14 +23,15 @@ def query_db(query):
     except Exception as e:
         return [str(e)]
 
-@app.route("/", methods=["GET", "POST"])
-def index():
+@app.route("/search", methods=["GET"])
+def search():
     results = None
-    if request.method == "POST":
-        user_input = request.form.get("name")
-        query = f"SELECT * FROM patients WHERE name = '{user_input}';"
+    user_id = request.args.get("id", "")  
+    if user_id:
+        query = f"SELECT * FROM bookings WHERE id = {user_id};"
         results = query_db(query)
-    return render_template("index.html", results=results)
+    return render_template("search.html", results=results)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

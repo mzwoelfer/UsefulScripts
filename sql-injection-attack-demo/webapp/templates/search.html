@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Injection Demo - Search</title>
+</head>
+<body>
+    <h1>SQL Injection Demo - Search</h1>
+    <p>Simulating a URL-based SQL Injection vulnerability.</p>
+    <p>Use the URL query parameter <code>?id=</code> to search for a booking by ID.</p>
+    <p>Example: <code>http://localhost:5000/search?id=1</code></p>
+    <p>Try injecting: <code>http://localhost:5000/search?id=1 OR 1=1</code></p>
+
+    {% if results %}
+    <h2>Results:</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Credit Card</th>
+        </tr>
+        {% for row in results %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>
+
